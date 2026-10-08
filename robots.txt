@@ -1,0 +1,3 @@
+# Entorno de prueba: no indexar nada.
+User-agent: *
+Disallow: /

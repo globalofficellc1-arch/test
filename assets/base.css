@@ -1,0 +1,94 @@
+/* GlobalOffice LLC — estilos base para landings de prueba.
+   Cambiá los colores y tipografías acá y se aplican a todas las landings. */
+:root {
+  --navy: #0B1F3A;
+  --navy-2: #13305A;
+  --accent: #F2B33D;
+  --accent-ink: #1A1300;
+  --green: #1FA855;
+  --ink: #1B2333;
+  --muted: #5B6578;
+  --line: #E3E8F0;
+  --bg: #FFFFFF;
+  --bg-soft: #F5F7FB;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(11, 31, 58, .10);
+  --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+.wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+/* Botones */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 22px; border-radius: 10px; font-weight: 700; font-size: 16px; text-decoration: none; border: 0; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 6px 18px rgba(242, 179, 61, .35); }
+.btn-wa { background: var(--green); color: #fff; }
+.btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.35); }
+.btn-block { width: 100%; }
+
+/* Header */
+.top { position: sticky; top: 0; z-index: 20; background: rgba(11, 31, 58, .96); backdrop-filter: blur(6px); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { color: #fff; font-weight: 800; font-size: 19px; text-decoration: none; letter-spacing: -.2px; }
+.logo span { color: var(--accent); }
+.top .btn { padding: 10px 16px; font-size: 14px; }
+
+/* Secciones */
+section { padding: 72px 0; }
+.eyebrow { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+h1, h2, h3 { line-height: 1.15; letter-spacing: -.02em; margin: 0 0 14px; }
+h1 { font-size: clamp(32px, 5vw, 50px); font-weight: 800; }
+h2 { font-size: clamp(26px, 3.6vw, 36px); font-weight: 800; }
+h3 { font-size: 19px; font-weight: 700; }
+.lead { font-size: 18px; color: var(--muted); }
+.center { text-align: center; }
+.soft { background: var(--bg-soft); }
+.dark { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; }
+.dark .lead { color: rgba(255,255,255,.78); }
+
+/* Grillas y tarjetas */
+.grid { display: grid; gap: 20px; }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+.card p { color: var(--muted); margin: 0; }
+.icon { width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: #FFF4DC; font-size: 22px; margin-bottom: 14px; }
+
+/* Formulario */
+.form-card { background: #fff; color: var(--ink); border-radius: 18px; padding: 28px; box-shadow: var(--shadow); }
+.form-card h3 { font-size: 21px; margin-bottom: 4px; }
+.form-card .sub { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.field input, .field select { width: 100%; padding: 13px 14px; border: 1.5px solid var(--line); border-radius: 10px; font: inherit; font-size: 16px; background: #fff; color: var(--ink); }
+.field input:focus, .field select:focus { outline: none; border-color: var(--navy-2); box-shadow: 0 0 0 3px rgba(19, 48, 90, .12); }
+.fine { font-size: 12px; color: var(--muted); margin: 12px 0 0; text-align: center; }
+.ok { display: none; text-align: center; padding: 20px 6px; }
+.ok .big { font-size: 42px; }
+
+/* FAQ */
+details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+summary { font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+summary::after { content: "+"; font-size: 22px; line-height: 1; color: var(--navy-2); }
+details[open] summary::after { content: "–"; }
+details p { color: var(--muted); margin: 10px 0 0; }
+
+/* Footer */
+footer { background: var(--navy); color: rgba(255,255,255,.7); font-size: 14px; padding: 32px 0; }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* Botón flotante WhatsApp */
+.wa-float { position: fixed; right: 18px; bottom: 18px; z-index: 30; width: 56px; height: 56px; border-radius: 50%; background: var(--green); display: grid; place-items: center; box-shadow: 0 8px 22px rgba(0,0,0,.25); }
+.wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+/* Cinta de entorno de prueba */
+.test-ribbon { background: #FFE8A3; color: #5A4300; font-size: 12px; font-weight: 700; text-align: center; padding: 6px 12px; }
+
+@media (max-width: 860px) {
+  .g3 { grid-template-columns: 1fr; }
+  section { padding: 56px 0; }
+}
