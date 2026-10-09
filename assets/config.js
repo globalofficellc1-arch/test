@@ -10,5 +10,9 @@ window.GO_CONFIG = {
   leadEndpoint: "",
 
   // Después de enviar el formulario, ¿abrir WhatsApp con el mensaje precargado?
-  openWhatsAppAfterSubmit: false
+  openWhatsAppAfterSubmit: false,
+
+  // Mostrar debajo de cada plan la referencia de precios del benchmark de mercado.
+  // Dejar en true solo en el entorno de prueba; en el sitio oficial poner false.
+  showMarketRef: true
 };
