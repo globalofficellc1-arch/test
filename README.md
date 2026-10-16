@@ -43,3 +43,4 @@ landings/<nombre>/    → una carpeta por landing (ej. landings/llc-v1/)
 - **Referencia de mercado:** la línea gris bajo cada plan se controla con `showMarketRef` en `assets/config.js`. Poner `false` antes de llevar el diseño al sitio oficial.
 - **Preseleccionar plan:** `?plan=pro` (valores: esencial, pro, ano-cubierto, mantenimiento, adicional).
 - Los leads salen con `landing: "sitio-v2"`, el `plan` y el `idioma`.
+- **Pagos:** los botones de Esencial, Pro y Año Cubierto llevan directo a los Payment Links de Stripe, definidos en `stripeLinks` de `assets/config.js` (y `produccion/assets/config.js`). Si un plan queda vacío, su botón vuelve al formulario. Mantenimiento y adicionales siguen por formulario. Al hacer clic se dispara `InitiateCheckout` (Meta) y `begin_checkout` (GA) si los píxeles están cargados.

@@ -73,6 +73,19 @@
     });
   });
 
+  // ---------- Botones de plan → checkout de Stripe ----------
+  var links = cfg.stripeLinks || {};
+  document.querySelectorAll("a[data-plan]").forEach(function (a) {
+    var url = links[a.getAttribute("data-plan")];
+    if (!url) return;
+    a.href = url;
+    a.setAttribute("data-checkout", "stripe");
+    a.addEventListener("click", function () {
+      if (window.fbq) window.fbq("track", "InitiateCheckout", { content_name: a.getAttribute("data-plan"), currency: "USD" });
+      if (window.gtag) window.gtag("event", "begin_checkout", { items: [{ item_id: a.getAttribute("data-plan") }] });
+    });
+  });
+
   // ---------- Plan elegido → formulario ----------
   var planSel = document.getElementById("plan");
   document.querySelectorAll("[data-plan]").forEach(function (a) {
