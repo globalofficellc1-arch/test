@@ -1,0 +1,50 @@
+# Publica la carpeta produccion/ en globaloffice.llc (Hostinger) por FTP.
+# Solo agrega o reemplaza archivos del sitio; no borra nada que no haya subido esta automatización
+# (las carpetas app/, order/, pay/, start/, etc. de public_html quedan intactas).
+# Requiere tres secrets en el repo: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD.
+name: Deploy produccion a globaloffice.llc
+
+on:
+  push:
+    branches: [main]
+    paths: ["produccion/**"]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-produccion
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verificar que estén cargados los datos de FTP
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+        run: |
+          if [ -z "$FTP_SERVER" ]; then
+            echo "::error::Faltan los secrets FTP_SERVER, FTP_USERNAME y FTP_PASSWORD (Settings > Secrets and variables > Actions)."
+            exit 1
+          fi
+
+      - name: Versionar scripts y estilos (evita la caché del CDN de Hostinger)
+        run: |
+          V="${GITHUB_SHA::7}"
+          sed -i -E "s#(assets/[a-z]+\.(js|css))(\?v=[0-9a-zA-Z]+)?\"#\1?v=${V}\"#g" produccion/index.html
+          grep -n 'assets/.*?v=' produccion/index.html
+
+      - name: Subir por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./produccion/
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .htaccess

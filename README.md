@@ -44,3 +44,10 @@ landings/<nombre>/    → una carpeta por landing (ej. landings/llc-v1/)
 - **Preseleccionar plan:** `?plan=pro` (valores: esencial, pro, ano-cubierto, mantenimiento, adicional).
 - Los leads salen con `landing: "sitio-v2"`, el `plan` y el `idioma`.
 - **Pagos:** los botones de Esencial, Pro y Año Cubierto llevan directo a los Payment Links de Stripe, definidos en `stripeLinks` de `assets/config.js` (y `produccion/assets/config.js`). Si un plan queda vacío, su botón vuelve al formulario. Mantenimiento y adicionales siguen por formulario. Al hacer clic se dispara `InitiateCheckout` (Meta) y `begin_checkout` (GA) si los píxeles están cargados.
+
+## Deploy de producción (globaloffice.llc)
+
+- La carpeta `produccion/` se publica sola en globaloffice.llc con GitHub Actions (`.github/workflows/deploy-produccion.yml`) cada vez que cambia algo en `produccion/` en `main`. También se puede correr a mano desde la pestaña Actions → "Deploy produccion a globaloffice.llc" → Run workflow.
+- Sube por FTP solo los archivos del sitio nuevo. No borra nada de `public_html` que no haya subido la automatización (app/, order/, pay/, start/ quedan intactas). Nunca sube `.htaccess`.
+- Versiona solo los scripts y estilos con el commit (`?v=<sha>`), así la caché de Hostinger no sirve archivos viejos.
+- Necesita tres secrets en el repo: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD` (cuenta FTP de Hostinger con raíz en `public_html` de globaloffice.llc). Si la raíz de la cuenta FTP es otra, cambiar `server-dir`.
